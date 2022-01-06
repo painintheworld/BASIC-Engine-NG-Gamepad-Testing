@@ -1,0 +1,115 @@
+10 BEL=1:BL=0
+100 SCREEN 14:PALETTE 0
+110 GOSUB &loadpointer
+115 GOSUB &loadlogo
+120 GOSUB &DRAWSNESPAD
+130 GOSUB &loadbuttons
+135 GOSUB &loadspaceship
+200 WHILE INKEY$=""
+210   MX=MOUSEX
+215   MY=MOUSEY
+220   MOVE SPRITE 30 TO MX,MY
+230   GPRINT 0,245,"X=";MX;"   ";
+235   GPRINT 0,253,"Y=";MY;"   ";
+990   VSYNC
+999 WEND
+1000 SCREEN 15:LIST:END
+1990 REM 
+1991 REM We will put subroutines past this point
+1992 REM 
+1996 REM 
+1997 REM load the mouse pointer sprite
+1998 REM 
+2000 &loadpointer
+2005 LOAD IMAGE "mouse/red16x16.png" AS SPRITE 30
+2010 SPRITE 30 SIZE 16,16 SCALE 1,1 ON
+2030 RETURN
+2096 REM 
+2097 REM let's load a BASIC Engine logo
+2098 REM 
+2100 &loadlogo
+2110 LOAD IMAGE "BElogos/29.png" TO 79,-63
+2140 RETURN
+2196 REM 
+2197 REM let's draw a simple SNES pad
+2198 REM 
+2200 &DRAWSNESPAD
+2210 CIRCLE 95,127,60,173,173
+2215 CIRCLE 95,127,57,173,0
+2220 CIRCLE 303,127,60,173,173
+2225 CIRCLE 303,127,57,173,0
+2230 LINE 139,91,256,91,173
+2235 LINE 137,165,258,165,173
+2240 LINE 139,90,256,90,173
+2245 LINE 137,166,258,166,173
+2260 RETURN
+2296 REM 
+2297 REM load button images on the screen
+2298 REM 
+2300 &loadbuttons
+2310 LOAD IMAGE "buttons1/upnp.png" TO 80,82
+2315 LOAD IMAGE "buttons1/downnp.png" TO 80,142
+2320 LOAD IMAGE "buttons1/rightnp.png" TO 111,112
+2325 LOAD IMAGE "buttons1/leftnp.png" TO 49,112
+2330 LOAD IMAGE "buttons1/leftnp.png" TO 79,40
+2335 LOAD IMAGE "buttons1/rightnp.png" TO 288,40
+2340 LOAD IMAGE "buttons1/startnp.png" TO 204,112
+2345 LOAD IMAGE "buttons1/selectnp.png" TO 164,112
+2350 LOAD IMAGE "buttons1/Xnp.png" TO 288,82
+2355 LOAD IMAGE "buttons1/Ynp.png" TO 255,112
+2360 LOAD IMAGE "buttons1/Anp.png" TO 321,112
+2365 LOAD IMAGE "buttons1/Bnp.png" TO 288,139
+2380 RETURN
+2496 REM 
+2497 REM load a sprite to move with pad movements
+2498 REM 
+2500 &loadspaceship
+2510 LOAD IMAGE "kozmick/kozmickraiderbigred1a.png" AS SPRITE 31
+2515 SPRITE 31 SIZE 32,32
+2530 RETURN
+2596 REM 
+2597 REM load sprite images for button presses
+2598 REM and move them over button images @loadbuttons
+2599 REM 
+2600 &loadbuttonsprites
+2610 LOAD IMAGE "buttons1/upp.png" AS SPRITE 0
+2615 LOAD IMAGE "buttons1/downp.png" AS SPRITE 1
+2620 LOAD IMAGE "buttons1/rightp.png" AS SPRITE 2
+2625 LOAD IMAGE "buttons1/leftp.png" AS SPRITE 3
+2630 LOAD IMAGE "buttons1/leftp.png" AS SPRITE 4
+2635 LOAD IMAGE "buttons1/rightp.png" AS SPRITE 5
+2640 LOAD IMAGE "buttons1/startp.png" AS SPRITE 6
+2645 LOAD IMAGE "buttons1/selectp.png" AS SPRITE 7
+2650 LOAD IMAGE "buttons1/Xp.png" AS SPRITE 8
+2655 LOAD IMAGE "buttons1/Yp.png" AS SPRITE 9
+2660 LOAD IMAGE "buttons1/Ap.png" AS SPRITE 10
+2665 LOAD IMAGE "buttons1/Bp.png" AS SPRITE 11
+2685 FOR LP=0 TO 11
+2690   SPRITE LP SIZE 32,32
+2695 NEXT LP
+2700 MOVE SPRITE 0 TO 80,82
+2705 MOVE SPRITE 1 TO 80,142
+2710 MOVE SPRITE 2 TO 111,112
+2715 MOVE SPRITE 3 TO 49,112
+2720 MOVE SPRITE 4 TO 79,40
+2725 MOVE SPRITE 5 TO 288,40
+2730 MOVE SPRITE 6 TO 204,112
+2735 MOVE SPRITE 7 TO 164,112
+2740 MOVE SPRITE 8 TO 288,82
+2745 MOVE SPRITE 9 TO 255,112
+2750 MOVE SPRITE 10 TO 321,112
+2755 MOVE SPRITE TO 288,139
+2795 RETURN
+
+
+
+
+
+
+
+5020 left=1:down=2:right=4:up=8
+5025 start=16:select=32
+5030 squareory=256:crossorb=512
+5035 circleora=1024 :triangleorx=2048
+5040 lshoulder1=8192:rightshoulder1=4096
+5045 lshoulder2=32768:rightshoulder2=16384
